@@ -3,18 +3,18 @@
     <h3>All the Pokemon!</h3>
     <div class="header-radios">
       <div class="radio radio-1">
-        <input type="radio" id="name" name="sort-radio" value="HTML">
+        <input type="radio" id="name" name="sort-radio" value="sort-name" (change)="sortResults($event)">
         <label for="name">Sort Name</label>
       </div>
       <div class="radio radio-2">
-        <input type="radio" id="id" name="sort-radio" value="CSS" checked>
+        <input type="radio" id="id" name="sort-radio" value="sort-id" checked (change)="sortResults($event)">
         <label for="id">Sort ID</label>
       </div>
     </div>
   </header>
   <main class="main">
     <div class="pokemon-grid">
-      <div class="pokemon" *ngFor="let pokemon of pokemonsdata?.results">
+      <div class="pokemon" *ngFor="let pokemon of pokemonsForDisplay">
         <img class="pokemon-image" [src]="pokemon.imageURL"/>
         <div class="pokemon-name">{{pokemon.name}}</div> 
         <!-- {{pokemon.url}} -->

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PokemonDataService, Pokemondata } from './pokemon-data.service';
+import { PokemonDataService, Pokemondata, Pokemon } from './pokemon-data.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +9,11 @@ import { PokemonDataService, Pokemondata } from './pokemon-data.service';
 export class AppComponent implements OnInit {
 
   protected pokemonsdata: Pokemondata | undefined;
+  pokemonsForDisplay: Pokemon[] | undefined;
+  page: number = 0;
+  resultsPerPage: number = 12;
+  // sortType: Sort = Sort.Id;
+
 
   constructor(
     private pokemonDataService: PokemonDataService) {}
@@ -22,30 +27,64 @@ export class AppComponent implements OnInit {
     this.pokemonDataService.getPokemons()
     .subscribe(pokemonsdata => {
       this.pokemonsdata = pokemonsdata;
-      //console.log(this.pokemonsdata);
-      
-      this.pokemonsdata.results.forEach((result, index) => {
-        this.pokemonDataService.getPokemon(result.url).subscribe(pokemon => {
-          if (this.pokemonsdata) {
-            this.pokemonsdata.results[index].imageURL = pokemon.sprites.front_default;
-          }
-        });
-      });
-      
+      console.log(this.pokemonsdata);
+      this.getPokemonsPage(this.page);
     });
   }
 
-  previousPage() {
-    if (this.pokemonsdata?.previous) {
-      this.pokemonDataService.pokemonsPaginatedURL = this.pokemonsdata.previous;
-      this.getPokemons();
-    }
+  getPokemonsPage(page: number) {
+    const sliceBegin = this.page * this.resultsPerPage;
+    const sliceEnd = sliceBegin + this.resultsPerPage;
+    
+    this.pokemonsForDisplay = this.pokemonsdata?.results.slice(sliceBegin, sliceEnd);
+    
+
+    this.pokemonsForDisplay?.forEach((result, index) => {
+      this.pokemonDataService.getPokemon(result.url).subscribe(pokemon => {
+        if (this.pokemonsForDisplay) {
+          this.pokemonsForDisplay[index].imageURL = pokemon.sprites.front_default;
+        }
+      });
+    });    
   }
-  nextPage() {
-    if (this.pokemonsdata?.next) {
-      this.pokemonDataService.pokemonsPaginatedURL = this.pokemonsdata.next;
-      this.getPokemons();
+
+  //TODO: correct type for event
+  sortResults(event: any) {
+    console.log(this.pokemonsdata);
+    this.page = 0;
+    const sort = event.target.value;
+
+    if (this.pokemonsdata) {
+      // TODO: use enum
+      if (sort === 'sort-name') {
+        this.pokemonsdata.results.sort((a, b) => a.name.localeCompare(b.name));
+        this.getPokemonsPage(this.page);
+      } else {
+        this.getPokemons();
+      }
     }
   }
 
+  previousPage() {
+    if (this.page > 0) {
+      this.page--;
+      this.getPokemonsPage(this.page);
+    }
+  }
+
+  nextPage() {
+    if (this.pokemonsdata) {
+      const totalPages = Math.trunc( this.pokemonsdata.results.length / this.resultsPerPage );
+      if (this.page + 1 <= totalPages) {
+        this.page++;
+        this.getPokemonsPage(this.page);
+      }
+    }
+  }
+
+}
+
+enum Sort {
+  Id = "ID",
+  Name = "NAME",
 }
