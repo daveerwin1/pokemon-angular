@@ -7,8 +7,14 @@ html, body {
 body {
     background-color: $neutral-20;
     margin: 0;
+    font-family: $font-family;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
-h1 {
+h3 {
     margin: 0;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 36px;
 }

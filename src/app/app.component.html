@@ -1,12 +1,12 @@
 <div class="page">
   <header class="header">
-    <h1>All the Pokemon! {{pokemonsdata?.count}}</h1>
+    <h3>All the Pokemon!</h3>
     <div class="header-radios">
-      <div class="radio radio1">
+      <div class="radio radio-1">
         <input type="radio" id="name" name="sort-radio" value="HTML">
         <label for="name">Sort Name</label>
       </div>
-      <div class="radio radio2">
+      <div class="radio radio-2">
         <input type="radio" id="id" name="sort-radio" value="CSS">
         <label for="id">Sort ID</label>
       </div>
@@ -25,8 +25,8 @@
   </main>
   <footer class="footer">
     <div class="footer-buttons">
-      <button type="button">Previous 12</button>
-      <button type="button">Next 12</button>
+      <button type="button" (click)="previousPage()">Previous 12</button>
+      <button type="button" (click)="nextPage()">Next 12</button>
     </div>
   </footer>
 </div>

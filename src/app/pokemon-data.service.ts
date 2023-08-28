@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class PokemonDataService {
 
   limit: number = 12;
-  pokemonsPaginatedURL = 'https://pokeapi.co/api/v2/pokemon?limit=12&offset=';
+  pokemonsPaginatedURL = 'https://pokeapi.co/api/v2/pokemon?limit=' + this.limit + '&offset=';
   pokemonURL = 'https://pokeapi.co/api/v2/pokemon/';
   
 

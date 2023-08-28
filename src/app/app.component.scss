@@ -26,6 +26,17 @@
     display: flex;
 }
 
+.radio {
+    font-family: $font-family-secondary;
+    font-size: 20px;
+    line-height: 32px;
+    font-weight: 400;
+}
+
+.radio-1 {
+    margin-right: 16px;
+}
+
 .main {
     flex-grow: 1;
 }
@@ -33,6 +44,17 @@
 .footer-buttons {
     display: flex;
     justify-content: space-between;
+    padding-top: 12px;
+
+    button {
+        font-family: $font-family-secondary;
+        color: $primary;
+        font-size: 16px;
+        line-height: 20px;
+        border: 1px solid $primary;
+        padding: 8px 12px;
+        border-radius: 4px;
+    }
 }
 
 .pokemon-grid {
@@ -47,4 +69,19 @@
     background-color: $neutral-light;
     border: 1px solid $neutral-30;
     border-radius: 12px;
+    padding: 16px;
+}
+
+.pokemon-image {
+    background-color: $image-bg;
+    width: 72px;
+    height: 72px;
+    border-radius: 100%;
+    margin-right: 12px;
+}
+
+.pokemon-name {
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: capitalize;
 }
