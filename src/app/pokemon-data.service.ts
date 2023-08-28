@@ -7,15 +7,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PokemonDataService {
 
-  limit: number = 12;
-  pokemonsPaginatedURL = 'https://pokeapi.co/api/v2/pokemon?limit=' + this.limit + '&offset=';
+  pokemonsPaginatedURL = 'https://pokeapi.co/api/v2/pokemon?limit=12&offset=0';
   pokemonURL = 'https://pokeapi.co/api/v2/pokemon/';
   
 
   constructor(private http: HttpClient) { }
 
-  getPokemons(page: number): Observable<Pokemondata> {
-    return this.http.get<Pokemondata>(this.pokemonsPaginatedURL + (page * this.limit));
+  getPokemons(): Observable<Pokemondata> {
+    return this.http.get<Pokemondata>(this.pokemonsPaginatedURL);
   }
 
   getPokemon(url: string): Observable<any> {

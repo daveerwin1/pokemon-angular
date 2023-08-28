@@ -9,8 +9,6 @@ import { PokemonDataService, Pokemondata } from './pokemon-data.service';
 export class AppComponent implements OnInit {
 
   protected pokemonsdata: Pokemondata | undefined;
-  protected pokemon: any;
-  private page = 0;
 
   constructor(
     private pokemonDataService: PokemonDataService) {}
@@ -21,10 +19,10 @@ export class AppComponent implements OnInit {
   }
 
   getPokemons(): void {
-    this.pokemonDataService.getPokemons(this.page)
+    this.pokemonDataService.getPokemons()
     .subscribe(pokemonsdata => {
       this.pokemonsdata = pokemonsdata;
-      console.log(this.pokemonsdata);
+      //console.log(this.pokemonsdata);
       
       this.pokemonsdata.results.forEach((result, index) => {
         this.pokemonDataService.getPokemon(result.url).subscribe(pokemon => {
@@ -38,15 +36,16 @@ export class AppComponent implements OnInit {
   }
 
   previousPage() {
-    if (this.page > 0) {
-      this.page--;
+    if (this.pokemonsdata?.previous) {
+      this.pokemonDataService.pokemonsPaginatedURL = this.pokemonsdata.previous;
       this.getPokemons();
     }
   }
   nextPage() {
-    console.log("TEST");
-    this.page++;
-    this.getPokemons();
+    if (this.pokemonsdata?.next) {
+      this.pokemonDataService.pokemonsPaginatedURL = this.pokemonsdata.next;
+      this.getPokemons();
+    }
   }
 
 }
