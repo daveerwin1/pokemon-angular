@@ -33,7 +33,12 @@
     font-weight: 400;
 
     input {
-        margin-right: 8px;
+        margin-right: 16px;
+        accent-color: $neutral-dark;
+    }
+
+    label {
+        color: $neutral-dark;
     }
 }
 
@@ -90,4 +95,5 @@
     font-size: 20px;
     line-height: 24px;
     text-transform: capitalize;
+    color: $neutral-dark;
 }
