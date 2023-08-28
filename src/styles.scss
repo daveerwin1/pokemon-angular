@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background-color: $neutral-20;
+    margin: 0;
+}
+
+h1 {
+    margin: 0;
+}

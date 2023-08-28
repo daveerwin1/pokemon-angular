@@ -1,0 +1,50 @@
+@import "../variables";
+
+:host {
+    display: block;
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    padding: 48px;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;;
+}
+
+.header-radios {
+    display: flex;
+}
+
+.main {
+    flex-grow: 1;
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pokemon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 12px;
+}
+
+.pokemon {
+    display: flex;
+    align-items: center;
+    background-color: $neutral-light;
+    border: 1px solid $neutral-30;
+    border-radius: 12px;
+}
